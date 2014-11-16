@@ -8,6 +8,7 @@ import java.util.*;
  */
 public class GrammarParser {
 
+    //Clase para manejar errores personalizados
     public static class ParseException extends Exception {
 
         private int line_num;

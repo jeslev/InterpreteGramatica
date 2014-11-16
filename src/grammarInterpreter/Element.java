@@ -11,7 +11,7 @@ public class Element {
     private String name;
 
     public Element() {
-        this.name = "temp" + last_alloc;
+        this.name = ""+last_alloc;
         last_alloc++;
     }
 

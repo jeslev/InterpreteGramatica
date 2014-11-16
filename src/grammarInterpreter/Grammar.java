@@ -7,7 +7,7 @@ import java.util.*;
  * @author jeslev
  */
 public class Grammar {
-
+    //Clase que maneja reglas (simbolo -> Elementos[])
     public static class Rule {
 
         private Symbol lhs;

@@ -38,6 +38,13 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         area1 = new javax.swing.JTextArea();
         area2 = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuAyuda = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        menuAbout = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        menuExit = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,7 +52,7 @@ public class GUI extends javax.swing.JFrame {
 
         labelText.setText("Texto:");
 
-        botonVerificar.setText("Verificar");
+        botonVerificar.setText("Generar");
         botonVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVerificarActionPerformed(evt);
@@ -53,6 +60,11 @@ public class GUI extends javax.swing.JFrame {
         });
 
         botonLimpiar.setText("Limpiar");
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLimpiarActionPerformed(evt);
+            }
+        });
 
         area1.setColumns(20);
         area1.setRows(5);
@@ -63,6 +75,59 @@ public class GUI extends javax.swing.JFrame {
                 area2ActionPerformed(evt);
             }
         });
+
+        menuAyuda.setText("Ayuda");
+        menuAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAyudaActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Ayuda");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuAyuda.add(jMenuItem1);
+
+        jMenuBar1.add(menuAyuda);
+
+        menuAbout.setText("About");
+        menuAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAboutActionPerformed(evt);
+            }
+        });
+
+        jMenuItem2.setText("Software by");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menuAbout.add(jMenuItem2);
+
+        jMenuBar1.add(menuAbout);
+
+        menuExit.setText("Exit");
+        menuExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuExitActionPerformed(evt);
+            }
+        });
+
+        jMenuItem3.setText("Exit");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        menuExit.add(jMenuItem3);
+
+        jMenuBar1.add(menuExit);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +159,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(label_gramatica)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelText)
@@ -110,26 +175,52 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerificarActionPerformed
-        Check v = new Check(area2.getText(), area1.getText());
+        Check v = new Check(area1.getText());
         if(v.init() == false) {
             JOptionPane.showMessageDialog(this, "Error! Verificar gramatica");
             return;
         }
-        Tree t = v.check();
-        if(t==null){
-            JOptionPane.showMessageDialog(this, "El texto no pertenece a la gramatica!");
-            return;
-        }
-        GUI_Tree gt = new GUI_Tree();
-        gt.setVisible(true);
-        gt.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        gt.setTitle("Arbol de derivacion");
-        
+        String res = v.random();
+        if(res.equals("ERROR")) JOptionPane.showMessageDialog(this, "No se logro generar");
+        else area2.setText(res);
     }//GEN-LAST:event_botonVerificarActionPerformed
 
     private void area2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_area2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_area2ActionPerformed
+
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+        area2.setText("");
+    }//GEN-LAST:event_botonLimpiarActionPerformed
+
+    private void menuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExitActionPerformed
+        
+    }//GEN-LAST:event_menuExitActionPerformed
+
+    private void menuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAboutActionPerformed
+        
+    }//GEN-LAST:event_menuAboutActionPerformed
+
+    private void menuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaActionPerformed
+        
+    }//GEN-LAST:event_menuAyudaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        String title = "Ayuda";
+        String msj = "Escriba la gramatica en la caja de texto grande\nPresione Generar para obtener "
+                + "frases aleaotorias que son aceptadas por la gramatica descrita";
+        JOptionPane.showConfirmDialog(this, msj, title, JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String title = "Sobre el interpretador de gramatica";
+        String credits = "Desarrollado por\nJesus Lovon\nLuis Carhuarica";
+        JOptionPane.showMessageDialog(this, credits, title, JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,8 +262,15 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField area2;
     private javax.swing.JButton botonLimpiar;
     private javax.swing.JButton botonVerificar;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelText;
     private javax.swing.JLabel label_gramatica;
+    private javax.swing.JMenu menuAbout;
+    private javax.swing.JMenu menuAyuda;
+    private javax.swing.JMenu menuExit;
     // End of variables declaration//GEN-END:variables
 }
