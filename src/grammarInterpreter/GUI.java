@@ -111,14 +111,18 @@ public class GUI extends javax.swing.JFrame {
 
     private void botonVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerificarActionPerformed
         Check v = new Check(area2.getText(), area1.getText());
-        Tree t = v.init();
-        if(t == null) {
-            JOptionPane.showMessageDialog(this, "Error! Verificar datos");
+        if(v.init() == false) {
+            JOptionPane.showMessageDialog(this, "Error! Verificar gramatica");
+            return;
+        }
+        Tree t = v.check();
+        if(t==null){
+            JOptionPane.showMessageDialog(this, "El texto no pertenece a la gramatica!");
             return;
         }
         GUI_Tree gt = new GUI_Tree();
         gt.setVisible(true);
-        gt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gt.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         gt.setTitle("Arbol de derivacion");
         
     }//GEN-LAST:event_botonVerificarActionPerformed

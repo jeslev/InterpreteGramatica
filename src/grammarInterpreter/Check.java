@@ -1,5 +1,3 @@
-
-
 package grammarInterpreter;
 
 
@@ -11,24 +9,27 @@ import java.util.StringTokenizer;
  */
 public class Check {
     
-    private Grammar grammar;
+    private Grammar grammar,g;
     private Parser parser = null;
-    private String text,area;
+    private String texto,area;
     
     public Check(String text, String area){
-        this.text = text;
+        this.texto = text;
         this.area = area;
         grammar = null;
     }
     
-    public Tree init(){
-        Grammar g =  getGrammar();
-        if(g == null) return null;
-        
-        StringTokenizer toks = new StringTokenizer(text);
+    public boolean init(){
+        g =  getGrammar(); // se procesa la gramatica
+        if(g == null) return false;
+        return true;
+    }
+    
+    public Tree check(){
+        StringTokenizer toks = new StringTokenizer(texto);
         Atom[] text = new Atom[toks.countTokens()];
 	boolean text_ok = true;
-        for(int i = 0; toks.hasMoreTokens(); i++) {
+        for(int i = 0; toks.hasMoreTokens(); i++) { //se procesa la cadena
             text[i] = g.getAtom(toks.nextToken());
             if(text[i] == null) text_ok = false;
 	}
@@ -37,7 +38,9 @@ public class Check {
         if(text_ok) {
             if(parser == null) parser = new Parser(g);
             t = parser.parse(text);
+            parser.printTree(t, 1);
         }
+        
         return t;
     }
     

@@ -99,7 +99,7 @@ class Parser {
 
     private Grammar computeNoUselessSymbols(Grammar g,
             HashMap orig_rules) {
-		// determine which symbols terminate in some string
+        // determine which symbols terminate in some string
         // (cf. page 89, Hopcroft and Ullman)
         HashSet terminating = new HashSet();
         boolean changed = true;
@@ -396,7 +396,7 @@ class Parser {
         return null;
     }
 
-	// g must have no useless symbols, epsilon-productions, or unit
+    // g must have no useless symbols, epsilon-productions, or unit
     // productions
     private void computeChomsky(Grammar g) {
         HashMap smap = new HashMap();
@@ -478,16 +478,9 @@ class Parser {
         a_map.add(new Dual(new SymbolTree(lhs, t), a, b));
     }
 
-    private void printChomsky() {
-        Iterator it = singles.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            Iterator it2 = ((HashMap) entry.getValue()).keySet().iterator();
-            while (it2.hasNext()) {
-                System.err.println(it2.next() + " -> "
-                        + entry.getKey());
-            }
-        }
+    public void printChomsky() {
+        Iterator it; 
+        
         it = duals.values().iterator();
         while (it.hasNext()) {
             HashSet entry = (HashSet) it.next();
@@ -497,6 +490,15 @@ class Parser {
                 System.err.println(d.lhs + " -> " + d.a + " " + d.b);
             }
         }
+        it = singles.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            Iterator it2 = ((HashMap) entry.getValue()).keySet().iterator();
+            while (it2.hasNext()) {
+                System.err.println(it2.next() + " -> "
+                        + entry.getKey());
+            }
+        }
     }
 
     public Tree parse(Atom[] x) {
@@ -504,7 +506,7 @@ class Parser {
             return null_parse;
         }
 
-		// CYK algorithm: V[i][j] represents all symbols that can
+        // CYK algorithm: V[i][j] represents all symbols that can
         // derive x[i..i+j] (inclusive of x[i+j]).
         int n = x.length;
         Map[][] V = new Map[n][n];
@@ -555,7 +557,7 @@ class Parser {
         return (Tree) subtrees.get(0);
     }
 
-    private void printTree(Tree chtree, int depth) {
+    public void printTree(Tree chtree, int depth) {
         SymbolTree root = (SymbolTree) chtree.getData();
         Tree[] children = chtree.getChildren();
         for (int i = 0; i < depth; i++) {
